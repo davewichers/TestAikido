@@ -60,9 +60,18 @@ public class Benchmark00215 extends HttpServlet {
 
         String bar = param;
 
-        java.io.File fileTarget =
-                new java.io.File(
-                        new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR), bar);
+        java.io.File baseFile =
+                new java.io.File(org.owasp.benchmark.helpers.Utils.TESTFILES_DIR)
+                        .getCanonicalFile();
+        java.nio.file.Path base = baseFile.toPath();
+        if (bar == null) {
+            throw new ServletException("Invalid file path");
+        }
+        java.nio.file.Path candidate = new java.io.File(baseFile, bar).getCanonicalFile().toPath();
+        if (!candidate.startsWith(base)) {
+            throw new ServletException("Invalid file path");
+        }
+        java.io.File fileTarget = candidate.toFile();
         response.getWriter()
                 .println(
                         "Access to file: '"
