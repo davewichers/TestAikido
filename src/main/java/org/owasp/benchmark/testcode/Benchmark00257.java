@@ -114,7 +114,7 @@ public class Benchmark00257 extends HttpServlet {
             response.getWriter()
                     .println(
                             "Problem executing crypto - javax.crypto.Cipher.getInstance(java.lang.String,java.security.Provider) Case");
-            e.printStackTrace(response.getWriter());
+            
             throw new ServletException(e);
         } catch (java.security.NoSuchProviderException e) {
             response.getWriter()
