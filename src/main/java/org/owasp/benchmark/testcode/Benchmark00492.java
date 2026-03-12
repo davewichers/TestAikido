@@ -13,7 +13,7 @@
  * PURPOSE. See the GNU General Public License for more details.
  *
  * @author Nick Sanidas
- * @created 2015
+ * @created 2016
  */
 package org.owasp.benchmark.testcode;
 
@@ -23,6 +23,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import org.owasp.encoder.Encode;
 
 @WebServlet(value = "/xss-00/Benchmark00492")
 public class Benchmark00492 extends HttpServlet {
@@ -52,6 +53,6 @@ public class Benchmark00492 extends HttpServlet {
         String bar = thing.doSomething(param);
 
         response.setHeader("X-XSS-Protection", "0");
-        response.getWriter().write("Parameter value: " + bar);
+        response.getWriter().write("Parameter value: " + Encode.forHtml(bar));
     }
 }
