@@ -41,7 +41,6 @@ public class Startup implements ServletContextListener {
             e.printStackTrace();
         } catch (Exception e) {
             System.out.println("ERROR: Could not find or add BouncyCastle as crypto provider.");
-            e.printStackTrace();
         }
 
         if (Security.getProvider("BC") == null)
